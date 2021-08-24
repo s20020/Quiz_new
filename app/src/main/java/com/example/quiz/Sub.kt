@@ -9,6 +9,8 @@ import com.example.quiz.databinding.ActivitySubBinding
 class Sub : AppCompatActivity() {
     private lateinit var binding: ActivitySubBinding
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySubBinding.inflate(layoutInflater)
@@ -16,7 +18,8 @@ class Sub : AppCompatActivity() {
         setContentView(binding.root)
 
         var index = intent.getIntExtra("INDEX",1)
-        var score = intent.getIntExtra("SCORE",0)
+        var score = intent.getIntExtra("SCORE", 0)
+
 
         //CSVを２次元配列に格納
         val assetManager = applicationContext.assets.open( "new_quiz.csv").bufferedReader()
@@ -62,16 +65,28 @@ class Sub : AppCompatActivity() {
 
         var random = (1..10).random()
         println(random)
-        var q1 = parent_list[1]
-        println(q1)
+        var q = parent_list[index]
 
-        binding.subTitle.text = index.toString()
+
+
+        binding.subTitle.text = "第　${index.toString()}　問"
         binding.score.text = score.toString()
-        binding.select1.text = q1[3]
-        binding.select2.text = q1[4]
+        binding.sentence.text = q[0]
+        binding.select1.text = q[2]
+        binding.select2.text = q[3]
+        binding.select3.text = q[4]
+        binding.select4.text = q[5]
 
 
         index++
+
+        score += 5
+
+
+
+
+        println(index)
+
 
 
 
@@ -86,10 +101,9 @@ class Sub : AppCompatActivity() {
     }
 
     fun onChange (view: View?, index:Int, score: Int) {
-        val intent = Intent(this, Sub::class.java).apply {
+        val intent = Intent(this, Sub::class.java)
             intent.putExtra("INDEX", index)
             intent.putExtra("SCORE", score)
-        }
 
 
         startActivity(intent)
