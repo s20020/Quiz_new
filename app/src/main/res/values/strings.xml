@@ -6,4 +6,6 @@
     <string name="result_title">結果発表</string>
     <string name="time">かかった時間</string>
     <string name="second">秒</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -5,49 +5,48 @@ import android.content.res.AssetManager
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import com.example.quiz.databinding.ActivityMainBinding
+import com.opencsv.CSVIterator
+import com.opencsv.CSVReader
 import kotlinx.serialization.descriptors.StructureKind
 import java.io.InputStream
+import java.io.StringReader
 import java.nio.file.Paths
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        binding.StartButton.setOnClickListener { onChange(it) }
-
-        val assetManager = applicationContext.assets.open( "quiz.csv").bufferedReader()
-
-        var a = assetManager.use() {
-            it.readText()
-        }
-        println(assetManager)
-
-        var b = a.split(",")
-        println(b)
-        println(b.size)
-
-        val array = Array(10, {arrayOfNulls<Int>(10)})
-
-        var c =array.toList()
 
 
-        binding.testText.text = b[8]
+        var index = 0
+        var score = 0
+
+        binding.StartButton.setOnClickListener { onChange(it, index,) }
+
+       //テスト用テキスト
+       //binding.testText.text = parent_arr[1][3]
         }
 
-    fun onChange (view: View?) {
-        val intent = Intent(this, ResultActivity::class.java)
+   fun onChange (view: View?, index: Int) {
+       val intent = Intent(this, Sub::class.java).apply {
+           putExtra("START", index)
+       }
+
         startActivity(intent)
     }
 
 
 
 }
+
+
 
 
 
