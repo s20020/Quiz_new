@@ -8,4 +8,6 @@
     <string name="second">秒</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ok_btn">決定</string>
+    <string name="next_btn">次へ</string>
 </resources>

@@ -7,16 +7,17 @@
     tools:context=".Sub">
 
     <Button
-        android:id="@+id/testButton"
+        android:id="@+id/okButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="Button"
+        android:text="@string/ok_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
@@ -61,18 +62,21 @@
 
     <TextView
         android:id="@+id/sentence"
-        android:layout_width="220dp"
-        android:layout_height="98dp"
+        android:layout_width="230dp"
+        android:layout_height="71dp"
         android:text="TextView"
         android:textAlignment="center"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="241dp" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sub_title" />
 
     <TextView
         android:id="@+id/sub_title"
         android:layout_width="204dp"
         android:layout_height="67dp"
-        android:text="TextView"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="34sp"
@@ -87,12 +91,31 @@
         android:layout_height="65dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="TextView"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="34sp"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="102dp"
+        android:layout_height="81dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="625dp" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/next_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/okButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

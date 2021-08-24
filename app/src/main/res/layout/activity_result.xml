@@ -43,7 +43,6 @@
         android:id="@+id/resultTime"
         android:layout_width="105dp"
         android:layout_height="58dp"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -61,7 +60,8 @@
         android:id="@+id/resultScore"
         android:layout_width="142dp"
         android:layout_height="127dp"
-        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
