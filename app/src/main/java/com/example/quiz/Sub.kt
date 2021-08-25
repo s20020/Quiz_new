@@ -3,11 +3,13 @@ package com.example.quiz
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.view.get
 import com.example.quiz.databinding.ActivitySubBinding
+import java.util.*
 
 class Sub : AppCompatActivity() {
     private lateinit var binding: ActivitySubBinding
@@ -23,6 +25,19 @@ class Sub : AppCompatActivity() {
         //インテントを受け取る
         var index = intent.getIntExtra("INDEX",1)
         var score = intent.getIntExtra("SCORE", 0)
+
+        //タイマーをつくる
+        object  : CountDownTimer (1000, 100) {
+            override fun onTick(millisUntilFinished: Long) {
+                binding.timertest.text = "残り${millisUntilFinished / 1000}秒"
+            }
+
+            override fun onFinish() {
+                binding.test.text = "終了"
+            }
+
+
+        }
 
 
         //CSVを２次元配列に格納
