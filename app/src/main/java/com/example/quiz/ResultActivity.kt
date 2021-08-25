@@ -16,16 +16,10 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        //最終結果を受け取る処理
         val resultScore = intent.getStringExtra("RESULT_SCORE")
 
-        println(resultScore)
-
+        //正解数を表示
         binding.resultScore.text = resultScore
-
-
-
-
     }
-
-
 }

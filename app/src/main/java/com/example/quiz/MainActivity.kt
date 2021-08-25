@@ -25,24 +25,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//
-//        var index = 1
-//        var score = 0
-
-
         binding.StartButton.setOnClickListener { onChange(it) }
 
-       //テスト用テキスト
-       //binding.testText.text = parent_arr[1][3]
         }
 
    fun onChange (view: View?) {
        val intent = Intent(this, Sub::class.java)
         startActivity(intent)
     }
-
-
-
 }
 
 
