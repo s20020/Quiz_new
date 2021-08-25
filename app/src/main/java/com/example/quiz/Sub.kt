@@ -3,13 +3,8 @@ package com.example.quiz
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.View
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import androidx.core.view.get
 import com.example.quiz.databinding.ActivitySubBinding
-import java.util.*
 
 class Sub : AppCompatActivity() {
     private lateinit var binding: ActivitySubBinding
@@ -22,34 +17,19 @@ class Sub : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        //インテントを受け取る
         var index = intent.getIntExtra("INDEX",1)
         var score = intent.getIntExtra("SCORE", 0)
 
-        //タイマーをつくる
-        object  : CountDownTimer (1000, 100) {
-            override fun onTick(millisUntilFinished: Long) {
-                binding.timertest.text = "残り${millisUntilFinished / 1000}秒"
-            }
-
-            override fun onFinish() {
-                binding.test.text = "終了"
-            }
-
-
-        }
-
 
         //CSVを２次元配列に格納
-
-        //assetにあるnew_quiz.csvを読み込む
         val assetManager = applicationContext.assets.open( "new_quiz.csv").bufferedReader()
         var a = assetManager.use() {
-            //すべてを変数aに代入
             it.readText()
         }
         var b = a.split(",")
-
+        println(b[0])
+        val taiga = "taiga"
+        println(taiga)
         val a1 = b.take(6)
         b = b.drop(6)
         println(b)
@@ -74,80 +54,58 @@ class Sub : AppCompatActivity() {
         val a11 = b.take(6)
         b = b.drop(6)
 
-        //val array = Array(6) { IntArray(10) }
-        //一つ一つの配列を合わせて２次元リストにする処理
+        val array = Array(6) { IntArray(10) }
         val parent_list = arrayListOf(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11)
-        //val parent_arr = parent_list.toTypedArray()
+        val parent_arr = parent_list.toTypedArray()
+        println(parent_list)
+        println(parent_arr)
+        println(parent_arr[1])
+        println(parent_list[3][3])
 
-        //indexでその都度、リストに中のリストを変数に代入
+
+        var random = (1..10).random()
+        println(random)
         var q = parent_list[index]
 
-        //答えの保持
-        val answer = q[2]
 
-        //４択をランダムにする処理リストを作成
-        val shahuruList = listOf(2,3,4,5)
-        val num = shahuruList.shuffled()
 
-        //text,radioButtonにそれぞれ値を入れる
         binding.subTitle.text = "第　${index.toString()}　問"
         binding.score.text = score.toString()
         binding.sentence.text = q[0]
-        binding.select1.text = q[num[0]]
-        binding.select2.text = q[num[1]]
-        binding.select3.text = q[num[2]]
-        binding.select4.text = q[num[3]]
+        binding.select1.text = q[2]
+        binding.select2.text = q[3]
+        binding.select3.text = q[4]
+        binding.select4.text = q[5]
 
 
-        //10問まで数える
         index++
+
+        score += 5
+
+
+
 
         println(index)
 
 
-        //決定ボタンを押した時の処理
-        binding.okButton.setOnClickListener {
-            val id = binding.radioGroup.checkedRadioButtonId
-            val comText = findViewById<RadioButton>(id).text
-
-            if(comText == answer) {
-                binding.test.text = "正解"
-                score += 1
-            }
-
-            else
-                binding.test.text = "不正解"
-
-
-            if (index > 10) {
-                resultChage(it, score)
-            }
 
 
 
 
+        binding.testButton.setOnClickListener { onChange(it, index, score) }
 
-        }
 
-        //次へボタンを押したときの処理
-        binding.nextButton.setOnClickListener {
-            onChange(it, index, score)
-        }
+
+
 
     }
 
-    //自分のクラスのインテントをわたす処理 index,scoreも渡す
     fun onChange (view: View?, index:Int, score: Int) {
         val intent = Intent(this, Sub::class.java)
             intent.putExtra("INDEX", index)
             intent.putExtra("SCORE", score)
-        startActivity(intent)
-    }
 
-    //最終結果画面へ遷移　
-    fun resultChage (view: View?, score: Int) {
-        val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra("RESULT_SCORE",score.toString())
+
         startActivity(intent)
     }
 
