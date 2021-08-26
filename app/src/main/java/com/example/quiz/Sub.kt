@@ -17,18 +17,15 @@ import kotlin.text.Typography.times
 
 class Sub : AppCompatActivity() {
     private lateinit var binding: ActivitySubBinding
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySubBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
 
         //自身のインテントを受け取る処理
         var index = intent.getIntExtra("INDEX",1)
-        var time = intent.getIntExtra("SCORE", 0)
+        var score = intent.getIntExtra("SCORE", 0)
 
 
 
@@ -38,9 +35,7 @@ class Sub : AppCompatActivity() {
             it.readText()
         }
         var b = a.split(",")
-        println(b[0])
-        val taiga = "taiga"
-        println(taiga)
+
         val a1 = b.take(6)
         b = b.drop(6)
         println(b)
@@ -65,7 +60,6 @@ class Sub : AppCompatActivity() {
         val a11 = b.take(6)
         b = b.drop(6)
 
-
         //２次元リストをつくる
         val parent_list = arrayListOf(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11)
 
@@ -80,19 +74,15 @@ class Sub : AppCompatActivity() {
         val answer = q[2]
 
 
-
-
         //それぞれのビューに値を代入
         binding.subTitle.text = "第　${index.toString()}　問"
-        binding.score.text = time.toString()
+        binding.score.text = score.toString()
         binding.sentence.text = q[0]
         binding.select1.text = q[num[0]]
         binding.select2.text = q[num[1]]
         binding.select3.text = q[num[2]]
         binding.select4.text = q[num[3]]
 
-        //10問目まで数える
-        //index++
 
 
         //タイマーのインスタンスを生成
@@ -135,7 +125,7 @@ class Sub : AppCompatActivity() {
             //正解の場合、
             if(selectText == answer) {
                 binding.test.text = "⭕"
-                time++
+                score++
             }
 
             //不正解の場合
@@ -154,12 +144,12 @@ class Sub : AppCompatActivity() {
             //１０を超えた場合は最終結果へ
             if (index > 10) {
                 timer.cancel()
-                resultChange(it, time)
+                resultChange(it, score)
             }
             //１０以下の場合は次の問題へ
             else {
                 timer.cancel()
-                onChange(it, index, time)
+                onChange(it, index, score)
             }
 
         }
@@ -167,10 +157,10 @@ class Sub : AppCompatActivity() {
 
     }
     //indexが１０以下の処理
-    fun onChange (view: View?, index:Int, time: Int) {
+    fun onChange (view: View?, index:Int, score: Int) {
         val intent = Intent(this, Sub::class.java)
             intent.putExtra("INDEX", index)
-            intent.putExtra("SCORE", time)
+            intent.putExtra("SCORE", score)
         startActivity(intent)
     }
 
