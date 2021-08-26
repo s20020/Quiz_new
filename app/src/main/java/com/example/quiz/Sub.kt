@@ -21,11 +21,14 @@ class Sub : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySubBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val start = System.currentTimeMillis();
+        println(start)
 
 
         //自身のインテントを受け取る処理
         var index = intent.getIntExtra("INDEX",1)
         var score = intent.getIntExtra("SCORE", 0)
+        var time = intent.getLongExtra("TIME", 0)
 
 
 
@@ -76,7 +79,7 @@ class Sub : AppCompatActivity() {
 
         //それぞれのビューに値を代入
         binding.subTitle.text = "第　${index.toString()}　問"
-        binding.score.text = score.toString()
+        binding.score.text = time.toString()
         binding.sentence.text = q[0]
         binding.select1.text = q[num[0]]
         binding.select2.text = q[num[1]]
@@ -87,7 +90,7 @@ class Sub : AppCompatActivity() {
 
         //タイマーのインスタンスを生成
 
-        //binding.timer.text = "10"
+
 
         val timer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -144,12 +147,17 @@ class Sub : AppCompatActivity() {
             //１０を超えた場合は最終結果へ
             if (index > 10) {
                 timer.cancel()
-                resultChange(it, score)
+                val end = System.currentTimeMillis()
+                time += (end - start) / 1000
+                resultChange(it, score, time)
+
             }
             //１０以下の場合は次の問題へ
             else {
                 timer.cancel()
-                onChange(it, index, score)
+                val end = System.currentTimeMillis()
+                time += (end - start) / 1000
+                onChange(it, index, score, time)
             }
 
         }
@@ -157,18 +165,20 @@ class Sub : AppCompatActivity() {
 
     }
     //indexが１０以下の処理
-    fun onChange (view: View?, index:Int, score: Int) {
+    fun onChange (view: View?, index:Int, score: Int, time: Long) {
         val intent = Intent(this, Sub::class.java)
             intent.putExtra("INDEX", index)
             intent.putExtra("SCORE", score)
+            intent.putExtra("TIME",time)
         startActivity(intent)
     }
 
     //indexが１０を超えた時最終画面へ遷移
-    fun resultChange (view: View?, time: Int) {
+    fun resultChange (view: View?, score: Int, time: Long) {
         
         val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra("RESULT_SCORE", time.toString())
+            intent.putExtra("RESULT_SCORE", score.toString())
+            intent.putExtra("RESULT_TIME", time.toString())
         startActivity(intent)
     }
 

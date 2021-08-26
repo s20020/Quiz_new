@@ -18,8 +18,10 @@ class ResultActivity : AppCompatActivity() {
 
         //最終結果を受け取る処理
         val resultScore = intent.getStringExtra("RESULT_SCORE")
+        val resultTime = intent.getStringExtra("RESULT_TIME")
 
         //正解数を表示
         binding.resultScore.text = resultScore
+        binding.resultTime.text = resultTime
     }
 }
