@@ -79,7 +79,6 @@ class Sub : AppCompatActivity() {
 
         //それぞれのビューに値を代入
         binding.subTitle.text = "第　${index.toString()}　問"
-        binding.score.text = time.toString()
         binding.sentence.text = q[0]
         binding.select1.text = q[num[0]]
         binding.select2.text = q[num[1]]
@@ -87,12 +86,9 @@ class Sub : AppCompatActivity() {
         binding.select4.text = q[num[3]]
 
 
-
         //タイマーのインスタンスを生成
-
-
-
-        val timer = object : CountDownTimer(10000, 1000) {
+        val timer = object : CountDownTimer(10000,
+                                           1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val second = millisUntilFinished / 1000L % 60L
                 binding.timer.text = second.toString()
@@ -106,6 +102,7 @@ class Sub : AppCompatActivity() {
             }
         }.start()
 
+        //１０問目まで繰り返す
         index++
 
         val times = measureTimeMillis {
@@ -116,8 +113,8 @@ class Sub : AppCompatActivity() {
 
         //okButtonか10秒が立った時に正解か不正解を表示
 
+        //１秒遅らせるためのインスタンス
         val handler = Handler(Looper.getMainLooper())
-
         binding.okButton.setOnClickListener {
 
             //選ばれているボタンのテキストを取得
@@ -148,6 +145,7 @@ class Sub : AppCompatActivity() {
             if (index > 10) {
                 timer.cancel()
                 val end = System.currentTimeMillis()
+                //時間の計算
                 time += (end - start) / 1000
                 resultChange(it, score, time)
 
@@ -156,10 +154,10 @@ class Sub : AppCompatActivity() {
             else {
                 timer.cancel()
                 val end = System.currentTimeMillis()
+                //時間の計算
                 time += (end - start) / 1000
                 onChange(it, index, score, time)
             }
-
         }
 
 

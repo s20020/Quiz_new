@@ -67,6 +67,7 @@
         android:layout_height="127dp"
         android:textAlignment="center"
         android:textSize="80sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
